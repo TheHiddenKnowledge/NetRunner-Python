@@ -3,7 +3,7 @@ import pygame
 
 
 class net:
-    def __init__(self, inputs, outputs, layers, minOut, maxOut, squish):
+    def __init__(self, inputs, outputs, layers, minOut, maxOut, squish, scalar):
         self.inputs = []
         self.outputs = []
         self.weights = []
@@ -19,13 +19,14 @@ class net:
         self.minOut = minOut
         self.maxOut = maxOut
         self.squish = squish
+        self.scalar = scalar
         self.totalNeurons = []
         self.totalNeurons.append(self.maxInput)
         for i in range(len(layers)):
             self.totalNeurons.append(self.layers[i])
         self.totalNeurons.append(self.maxOutput)
         for i in range(len(self.totalNeurons) - 1):
-            tempw = 1 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - .5
+            tempw = .1 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - .05
             self.weights.append(tempw)
             tempb = np.random.random_sample((self.totalNeurons[i + 1]))
             self.biases.append(tempb)
@@ -107,12 +108,19 @@ class net:
         return (self.maxOut - self.minOut) * self.outputs + self.minOut
 
     def loadnet(self, filename):
-        if len(np.load(filename + '.npz', allow_pickle=True).files) != 0:
+        if len(np.load(filename + '.npz', allow_pickle=True).files) > 1:
             self.weights = np.load(filename + '.npz', allow_pickle=True)['arr_0']
             self.biases = np.load(filename + '.npz', allow_pickle=True)['arr_1']
 
     def savenet(self, filename):
         np.savez(filename, self.weights, self.biases, fmt='%s')
+
+    def parsesets(self, filename):
+        sets = []
+        f = open(filename, 'r')
+        for line in f.readlines():
+            sets.append(eval(line.strip()))
+        return sets
 
     def getgradient(self, expected):
         tempg = []
@@ -143,11 +151,24 @@ class net:
                         else:
                             tempgg[k] += self.weights[idx][j][k] * self.sigderiv(self.layerout[idx+1][j]) * tempg[i - 1][j]
             tempg.append(tempgg)
-            #print(tempg)
-        print(self.weights)
-        print(self.gradientw)
-        print(self.biases)
-        print(self.gradientb)
 
+    def getset(self, inputset, expectedset):
+        avg_gw = []
+        avg_gb = []
+        for i in range(len(inputset)):
+            self.inputs = inputset[i]
+            self.in2out()
+            self.getgradient(expectedset[i])
+            if i == 0:
+                avg_gw = self.gradientw
+                avg_gb = self.gradientb
+            else:
+                avg_gw += self.gradientw
+                avg_gb += self.gradientb
+        for i in range(len(self.weights)):
+            self.weights[i] -= self.scalar*avg_gw[i] / len(inputset)
+            self.biases[i] -= self.scalar * avg_gb[i] / len(inputset)
 
-
+    def trainnet(self, inputsets, expectedsets):
+        for i in range(len(inputsets)):
+            self.getset(inputsets[i], expectedsets[i])
