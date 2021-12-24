@@ -1,9 +1,10 @@
+import numpy as np
 import pygame
 import random
 import netrunner
 
 # Creates an object for the net
-n = netrunner.net(4, 2, [4, 4], -5, 5, 5, .1)
+n = netrunner.net(4, 2, [4, 4, 4], -5, 5, 5, .1)
 pygame.init()
 field = pygame.display.set_mode((800, 800))
 finished = False
@@ -24,8 +25,9 @@ class Player:
         self.moveY = 10
         self.moveX = 0
         self.success = False
-        self.mind = 1
-        self.idx = 0
+        self.vision = 75
+        self.angle = np.pi / 6
+        self.step = 10
 
     # Draws the players with pygame
     def load(self):
@@ -35,31 +37,28 @@ class Player:
 
     # Detects the object to use as an input to the net
     def detect(self, obstacles):
-        # Gets the x offset, y offset, and distance between the player and all obstacles
-        dx = []
-        dy = []
-        distances = []
-        temp = []
-        for i in range(len(obstacles)):
-            DX = self.xc - obstacles[i].xc
-            DY = self.yc - obstacles[i].yc
-            dist = (((self.xc - obstacles[i].xc) ** 2) + ((self.yc - obstacles[i].yc) ** 2)) ** .5
-            dx.append(DX)
-            dy.append(DY)
-            distances.append(dist)
-            temp.append(dist)
-        temp.sort()
-        # This algorithm selects the best fit obstacle for the net to use
-        mind = dx[distances.index(temp[0])]
-        for i in range(len(temp)):
-            if abs(dy[i]) < 50:
-                if abs(dx[i]) < mind:
-                    mind = dx[i]
-        if abs(mind - self.mind) > self.mind / 4:
-            self.mind = mind
-            self.idx = dx.index(mind)
-        obstacles[self.idx].color = (0, 255, 0)
-        return [obstacles[self.idx]]
+        mag = (self.moveX ** 2 + self.moveY ** 2) ** .5
+        data = [0, 0, 0, 0]
+        for i in range(self.step):
+            px = self.vision * self.moveX / mag
+            py = self.vision * self.moveY / mag
+            px0 = px * np.cos(self.angle * (i - self.step / 2) / self.step) - py * np.sin(
+                self.angle * (i - self.step / 2) / self.step)
+            py0 = px * np.sin(self.angle * (i - self.step / 2) / self.step) + py * np.cos(
+                self.angle * (i - self.step / 2) / self.step)
+            for j in range(self.vision):
+                for k in range(len(obstacles)):
+                    px1 = j * px0 / self.vision
+                    py1 = j * py0 / self.vision
+                    if obstacles[k].yc - obstacles[k].h / 2 < -py1 + self.yc < obstacles[k].yc + obstacles[k].h / 2 and \
+                            obstacles[
+                                k].xc - obstacles[k].w / 2 < -px1 + self.xc < obstacles[k].xc + obstacles[k].w / 2:
+                        obstacles[k].color = (0, 255, 0)
+                        px0 = px1
+                        py0 = py1
+                        data = [obstacles[k].xc, obstacles[k].yc, obstacles[k].w, obstacles[k].h]
+            pygame.draw.line(field, (0, 255, 255), (self.xc, self.yc), (-px0 + self.xc, -py0 + self.yc))
+        return data
 
     # Determines screen and goal collisions
     def bounds(self, goal):
@@ -82,19 +81,19 @@ class Player:
         # Gets the obstacle that best suits the net
         chosen = self.detect(obstacles)
         # Assigns the inputs to the net as relative to the players position
-        inputs = [self.xc - chosen[0].xc, self.yc - chosen[0].yc, self.xc - goal.xc, self.yc - goal.yc]
+        inputs = [self.xc - chosen[0], self.yc - chosen[1], self.xc - goal.xc, self.yc - goal.yc]
         n.inputs = inputs
         # Evaluates the net using the provided inputs
         n.outputs = n.in2out()
         # Fails the player if it has collided with an obstacle
-        if abs(inputs[0]) < .9 * (self.w / 2 + chosen[0].w / 2) and abs(inputs[1]) < .9 * (
-                self.h / 2 + chosen[0].h / 2):
+        if chosen[1] - chosen[3] / 2 < self.yc < chosen[1] + chosen[3] / 2 and chosen[0] - chosen[
+            2] / 2 < self.xc < chosen[0] + chosen[2] / 2:
             self.y = self.yorg
             self.x = self.xorg
             n.fails += 1
         # The following if-elif-else statements provide the net with the expected behavior based on the inputs
-        if abs(n.inputs[0]) < 1.5 * (self.w / 2 + chosen[0].w) / 2 and n.inputs[1] < 4 * (self.h / 2 + chosen[0].h / 2):
-            if n.inputs[1] > self.h / 2 + chosen[0].h / 2:
+        if inputs[0] != self.xc and inputs[1] != self.yc:
+            if n.inputs[1] > self.h / 2 + chosen[3] / 2:
                 if inputs[0] > 0:
                     expected = [0, 0]
                 else:
@@ -106,17 +105,17 @@ class Player:
                     expected = [1, 1]
         else:
             if n.inputs[2] < 0 and n.inputs[3] > 0:
-                expected = [.4, .6]
+                expected = [0, 1]
             elif n.inputs[2] > 0 and n.inputs[3] > 0:
-                expected = [.6, .6]
+                expected = [1, 1]
             elif n.inputs[2] < 0 and n.inputs[3] < 0:
-                expected = [.4, .4]
+                expected = [0, 0]
             elif n.inputs[2] > 0 and n.inputs[3] < 0:
-                expected = [.6, .4]
+                expected = [1, 0]
             elif n.inputs[2] > 0 and abs(n.inputs[3]) < self.h / 2 + goal.h / 2:
-                expected = [.6, .5]
+                expected = [1, .5]
             elif n.inputs[2] < 0 and abs(n.inputs[3]) < self.h / 2 + goal.h / 2:
-                expected = [.4, .5]
+                expected = [0, .5]
         # Gets and applies the gradients of both the weights and biases
         n.getset([n.inputs], [expected])
 
