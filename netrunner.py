@@ -4,7 +4,7 @@ import pygame
 
 class net:
     # Initializes the net object with the desired parameters
-    def __init__(self, inputs, outputs, layers, minOut, maxOut, squish, scalar):
+    def __init__(self, inputs, outputs, layers, minOut, maxOut, squish):
         self.inputs = []
         self.outputs = []
         self.weights = []
@@ -26,8 +26,11 @@ class net:
         self.maxOut = maxOut
         # Factor used in sigmoid to determine how much the output is "squished"
         self.squish = squish
-        # Multiplier for gradient
-        self.scalar = scalar
+        # Magnitude of the total gradient
+        self.mag = 0
+        # Constants used to calculate step size
+        self.decay = 2
+        self.momentum = 5
         # List of number of neurons per layer
         self.totalNeurons = []
         self.totalNeurons.append(self.maxInput)
@@ -146,6 +149,7 @@ class net:
 
     # Gets the gradient of the weights and biases from the expected
     def getgradient(self, expected):
+        self.mag = 0
         tempg = []
         for i in range(len(self.weights)):
             idx = len(self.weights) - i - 1
@@ -158,6 +162,7 @@ class net:
                 else:
                     self.gradientb[idx][j] = self.sigderiv(self.layerout[idx + 1][j]) * \
                                              tempg[i - 1][j]
+                self.mag += self.gradientb[idx][j]**2
                 for k in range(self.weights[idx].shape[1]):
                     # Calculates gradient of the weights using chain rule
                     if i == 0:
@@ -180,25 +185,46 @@ class net:
                         else:
                             tempgg[k] += self.weights[idx][j][k] * self.sigderiv(self.layerout[idx + 1][j]) * \
                                          tempg[i - 1][j]
+                    self.mag += self.gradientw[idx][j][k] ** 2
             tempg.append(tempgg)
+        self.mag = self.mag**.5
 
-    # Gets the average gradient for a set of data and appplies the changes to the net
+    # Gets the learning rate for the neural net
+    def getLearn(self, error):
+        # Decay is determined by the magnitude of the total gradient
+        # Momentum is determined by the
+        step = self.momentum * error + self.decay * self.mag
+        return step
+
+    # Gets the average gradient for a set of data and applies the changes to the net
     def getset(self, inputset, expectedset):
         avg_gw = []
         avg_gb = []
+        avg_step = 0
         for i in range(len(inputset)):
+            avg_expected = 0
+            mag = 0
             self.inputs = inputset[i]
             self.in2out()
             self.getgradient(expectedset[i])
-            if i == 0:
-                avg_gw = self.gradientw
-                avg_gb = self.gradientb
-            else:
-                avg_gw += self.gradientw
-                avg_gb += self.gradientb
+            for j in range(len(self.weights)):
+                if i == 0:
+                    avg_gw.append(self.gradientw[j])
+                    avg_gb.append(self.gradientb[j])
+                else:
+                    avg_gw[j] += self.gradientw[j]
+                    avg_gb[j] += self.gradientb[j]
+            for j in range(len(expectedset[i])):
+                mag += (self.layersquish[-1][j]-expectedset[i][j])**4
+            mag = mag**.5
+            for j in range(len(expectedset[i])):
+                avg_expected += (self.layersquish[-1][j]-expectedset[i][j])**2 / mag
+            avg_expected /= len(expectedset[i])
+            avg_step += self.getLearn(avg_expected)
+        avg_step /= len(expectedset)
         for i in range(len(self.weights)):
-            self.weights[i] -= self.scalar * avg_gw[i] / len(inputset)
-            self.biases[i] -= self.scalar * avg_gb[i] / len(inputset)
+            self.weights[i] -= avg_step * avg_gw[i] / len(inputset)
+            self.biases[i] -= avg_step * avg_gb[i] / len(inputset)
 
     # Trains the net by calculating the average gradient for multiple sets of data and applying the changes
     def trainnet(self, inputsets, expectedsets):
