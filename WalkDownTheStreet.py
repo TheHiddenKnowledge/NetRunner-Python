@@ -4,7 +4,7 @@ import random
 import netrunner
 
 # Creates an object for the net
-n = netrunner.net(4, 2, [4, 4, 4], -5, 5, 5)
+n = netrunner.net(4, 2, [4, 4, 4], .01, .9, 5)
 pygame.init()
 field = pygame.display.set_mode((800, 800))
 finished = False
@@ -28,7 +28,7 @@ class Player:
         self.success = False
         # Variables used to define the field of view
         self.vision = 50
-        self.angle = np.pi / 3
+        self.angle = np.pi / 6
         self.step = 5
         # Sets used for gradient descent
         self.expectedlist = []
@@ -55,6 +55,7 @@ class Player:
                 self.angle * (i - self.step / 2) / self.step)
             py0 = px * np.sin(self.angle * (i - self.step / 2) / self.step) + py * np.cos(
                 self.angle * (i - self.step / 2) / self.step)
+            # Tracing along each ray
             for j in range(self.vision):
                 for k in range(len(obstacles)):
                     px1 = j * px0 / self.vision
@@ -117,17 +118,17 @@ class Player:
         # Expected behavior if the player is near the goal
         else:
             if n.inputs[2] < 0 and n.inputs[3] > 0:
-                self.expectedlist.append([.25, .75])
+                self.expectedlist.append([0, 1])
             elif n.inputs[2] > 0 and n.inputs[3] > 0:
-                self.expectedlist.append([.75, .75])
+                self.expectedlist.append([1, 1])
             elif n.inputs[2] < 0 and n.inputs[3] < 0:
-                self.expectedlist.append([.25, .25])
+                self.expectedlist.append([0, 0])
             elif n.inputs[2] > 0 and n.inputs[3] < 0:
-                self.expectedlist.append([.75, .25])
+                self.expectedlist.append([1, 0])
             elif n.inputs[2] > 0 and abs(n.inputs[3]) < self.h / 2 + goal.h / 2:
-                self.expectedlist.append([.75, .5])
+                self.expectedlist.append([1, .5])
             elif n.inputs[2] < 0 and abs(n.inputs[3]) < self.h / 2 + goal.h / 2:
-                self.expectedlist.append([.25, .5])
+                self.expectedlist.append([0, .5])
         # Gets and applies the gradients of both the weights and biases
         if len(self.expectedlist) == 10:
             n.getset(self.inputlist, self.expectedlist)
@@ -136,7 +137,7 @@ class Player:
 
     # Applies the output of the net to the player to create the desired movement
     def move(self):
-        out = n.adjustoutput()
+        out = n.adjustoutput(-1, 1)
         self.moveX = out[0]
         self.moveY = out[1]
         p.y -= self.moveY
@@ -206,8 +207,9 @@ def updateGUI(player, course, goal):
 
 # Creating all necessary simulation objects
 p = Player(400, 780, 10, 10)
-obstacles = generateCourse(60, 25, 775, 100, 700, 25, 40)
-goal = Obstacle(380, 50, 40, 40)
+# ob = Obstacle(200, 400, 400, 200)
+obstacles = generateCourse(60, 25, 775, 100, 775, 25, 40)
+goal = Obstacle(360, 30, 80, 80)
 clock = pygame.time.Clock()
 # Loop that keeps the pygame window constantly updated
 while not finished:
@@ -220,7 +222,7 @@ while not finished:
     p.move()
     # If the player has succeeded the course positions are reassigned to create diverse results
     if p.success:
-        updateCourse(obstacles, 25, 775, 100, 700, 25, 40)
+        updateCourse(obstacles, 25, 775, 100, 775, 25, 40)
         p.success = False
     pygame.display.flip()
     # The clock speed can be increased to make the simulation run faster. This could have consequences if it is too high
