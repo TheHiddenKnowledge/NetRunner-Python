@@ -4,7 +4,7 @@ import pygame
 
 class net:
     # Initializes the net object with the desired parameters
-    def __init__(self, inputs, outputs, layers, minOut, maxOut, squish):
+    def __init__(self, inputs, outputs, layers, alpha, beta, squish):
         self.inputs = []
         self.outputs = []
         self.weights = []
@@ -20,17 +20,11 @@ class net:
         self.maxInput = inputs
         self.maxOutput = outputs
         self.layers = layers
-        # The minimum value for the output
-        self.minOut = minOut
-        # The maximum value for the output
-        self.maxOut = maxOut
+        # Parameters used for gradient descent
+        self.alpha = alpha
+        self.beta = beta
         # Factor used in sigmoid to determine how much the output is "squished"
         self.squish = squish
-        # Magnitude of the total gradient
-        self.mag = 0
-        # Constants used to calculate step size
-        self.decay = 2
-        self.momentum = 5
         # List of number of neurons per layer
         self.totalNeurons = []
         self.totalNeurons.append(self.maxInput)
@@ -39,12 +33,15 @@ class net:
         self.totalNeurons.append(self.maxOutput)
         # Initializing weights and biases for net
         for i in range(len(self.totalNeurons) - 1):
-            tempw = .1 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - .05
+            tempw = 10 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - 5
             self.weights.append(tempw)
-            tempb = np.random.random_sample((self.totalNeurons[i + 1]))
+            tempb = 10 * np.random.random_sample((self.totalNeurons[i + 1])) - 5
             self.biases.append(tempb)
             self.gradientw.append(np.zeros((self.totalNeurons[i + 1], self.totalNeurons[i])))
             self.gradientb.append(np.zeros((self.totalNeurons[i + 1])))
+        # Previous gradient used for the momentum of the gradient
+        self.prevgradientw = self.gradientw
+        self.prevgradientb = self.gradientb
         self.successes = 0
         self.fails = 0
 
@@ -53,9 +50,9 @@ class net:
         self.weights = []
         self.biases = []
         for i in range(len(self.totalNeurons) - 1):
-            tempw = .1 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - .05
+            tempw = 1000 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - 500
             self.weights.append(tempw)
-            tempb = np.random.random_sample((self.totalNeurons[i + 1]))
+            tempb = 1000 * np.random.random_sample((self.totalNeurons[i + 1])) - 500
             self.biases.append(tempb)
 
     # Draws the net using pygame
@@ -114,6 +111,8 @@ class net:
 
     # Given that the input is defined this function will evaluate the net to get the output
     def in2out(self):
+        self.layerout = []
+        self.layersquish = []
         current = np.array(self.inputs)
         self.layerout.append(current)
         self.layersquish.append(current)
@@ -126,8 +125,8 @@ class net:
         return current
 
     # The output is typically between 0 and 1, so this function will adjust the output to the desired values
-    def adjustoutput(self):
-        return (self.maxOut - self.minOut) * self.outputs + self.minOut
+    def adjustoutput(self, minOut, maxOut):
+        return (maxOut - minOut) * self.outputs + minOut
 
     # Loads net from an npz file
     def loadnet(self, filename):
@@ -149,7 +148,6 @@ class net:
 
     # Gets the gradient of the weights and biases from the expected
     def getgradient(self, expected):
-        self.mag = 0
         tempg = []
         for i in range(len(self.weights)):
             idx = len(self.weights) - i - 1
@@ -157,18 +155,17 @@ class net:
             for j in range(self.weights[idx].shape[0]):
                 # Calculates gradient of the biases using chain rule
                 if i == 0:
-                    self.gradientb[idx][j] = self.sigderiv(self.layerout[idx + 1][j]) * 2 * (
-                            self.layersquish[idx][j] - expected[j])
+                    self.gradientb[idx][j] = self.sigderiv(self.layerout[-1][j]) * 2 * (
+                            self.layersquish[idx + 1][j] - expected[j])
                 else:
                     self.gradientb[idx][j] = self.sigderiv(self.layerout[idx + 1][j]) * \
                                              tempg[i - 1][j]
-                self.mag += self.gradientb[idx][j]**2
                 for k in range(self.weights[idx].shape[1]):
                     # Calculates gradient of the weights using chain rule
                     if i == 0:
                         self.gradientw[idx][j][k] = self.layerout[idx][k] * self.sigderiv(
-                            self.layerout[idx + 1][j]) * 2 * (
-                                                            self.layersquish[idx][j] - expected[j])
+                            self.layerout[-1][j]) * 2 * (
+                                                            self.layersquish[-1][j] - expected[j])
                         # Uses backpropagation to find the gradients of the previous layers
                         if j == 0:
                             tempgg.append(self.weights[idx][j][k] * self.sigderiv(self.layerout[idx + 1][j]) * 2 * (
@@ -185,25 +182,16 @@ class net:
                         else:
                             tempgg[k] += self.weights[idx][j][k] * self.sigderiv(self.layerout[idx + 1][j]) * \
                                          tempg[i - 1][j]
-                    self.mag += self.gradientw[idx][j][k] ** 2
             tempg.append(tempgg)
-        self.mag = self.mag**.5
-
-    # Gets the learning rate for the neural net
-    def getLearn(self, error):
-        # Decay is determined by the magnitude of the total gradient
-        # Momentum is determined by the
-        step = self.momentum * error + self.decay * self.mag
-        return step
 
     # Gets the average gradient for a set of data and applies the changes to the net
     def getset(self, inputset, expectedset):
+        # Average gradients for the set
         avg_gw = []
         avg_gb = []
-        avg_step = 0
+        # Avg error for the set
+        avg_error = 0
         for i in range(len(inputset)):
-            avg_expected = 0
-            mag = 0
             self.inputs = inputset[i]
             self.in2out()
             self.getgradient(expectedset[i])
@@ -214,17 +202,20 @@ class net:
                 else:
                     avg_gw[j] += self.gradientw[j]
                     avg_gb[j] += self.gradientb[j]
+            # Calculated the avg error for the set
+            avg_expected = 0
             for j in range(len(expectedset[i])):
-                mag += (self.layersquish[-1][j]-expectedset[i][j])**4
-            mag = mag**.5
-            for j in range(len(expectedset[i])):
-                avg_expected += (self.layersquish[-1][j]-expectedset[i][j])**2 / mag
+                avg_expected += (self.layersquish[-1][j] - expectedset[i][j]) ** 2
             avg_expected /= len(expectedset[i])
-            avg_step += self.getLearn(avg_expected)
-        avg_step /= len(expectedset)
+            avg_error += avg_expected
+        avg_error /= len(expectedset)
+        # Descending the gradient using the momentum theorem for neural nets
         for i in range(len(self.weights)):
-            self.weights[i] -= avg_step * avg_gw[i] / len(inputset)
-            self.biases[i] -= avg_step * avg_gb[i] / len(inputset)
+            self.weights[i] -= (self.beta * self.prevgradientw[i] + self.alpha * avg_gw[i]) / len(inputset)
+            self.biases[i] -= (self.beta * self.prevgradientb[i] + self.alpha * avg_gb[i]) / len(inputset)
+        self.prevgradientw = avg_gw
+        self.prevgradientb = avg_gb
+        return avg_error
 
     # Trains the net by calculating the average gradient for multiple sets of data and applying the changes
     def trainnet(self, inputsets, expectedsets):
