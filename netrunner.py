@@ -216,8 +216,3 @@ class net:
         self.prevgradientw = avg_gw
         self.prevgradientb = avg_gb
         return avg_error
-
-    # Trains the net by calculating the average gradient for multiple sets of data and applying the changes
-    def trainnet(self, inputsets, expectedsets):
-        for i in range(len(inputsets)):
-            self.getset(inputsets[i], expectedsets[i])
