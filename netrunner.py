@@ -2,6 +2,11 @@ import numpy as np
 import pygame
 
 
+# NetRunner for Python
+# Created by Isaiah Finney
+# This module provides a means to create, execute, and optimize a neural net
+# The gradient descent uses momentum to increase optimization speed
+
 class net:
     # Initializes the net object with the desired parameters
     def __init__(self, inputs, outputs, layers, alpha, beta, squish):
@@ -31,29 +36,23 @@ class net:
         for i in range(len(layers)):
             self.totalNeurons.append(self.layers[i])
         self.totalNeurons.append(self.maxOutput)
+        self.successes = 0
+        self.fails = 0
+
+    # Randomly generates weights and biases for the nets, must be called after creating net object
+    def randomGenes(self, minweight, maxweight, minbias, maxbias):
         # Initializing weights and biases for net
         for i in range(len(self.totalNeurons) - 1):
-            tempw = 10 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - 5
+            tempw = (maxweight - minweight) * np.random.random_sample(
+                (self.totalNeurons[i + 1], self.totalNeurons[i])) + minweight
             self.weights.append(tempw)
-            tempb = 10 * np.random.random_sample((self.totalNeurons[i + 1])) - 5
+            tempb = (maxbias - minbias) * np.random.random_sample((self.totalNeurons[i + 1])) + minbias
             self.biases.append(tempb)
             self.gradientw.append(np.zeros((self.totalNeurons[i + 1], self.totalNeurons[i])))
             self.gradientb.append(np.zeros((self.totalNeurons[i + 1])))
         # Previous gradient used for the momentum of the gradient
         self.prevgradientw = self.gradientw
         self.prevgradientb = self.gradientb
-        self.successes = 0
-        self.fails = 0
-
-    # Randomly generates weights and biases for the nets
-    def randomGenes(self):
-        self.weights = []
-        self.biases = []
-        for i in range(len(self.totalNeurons) - 1):
-            tempw = 1000 * np.random.random_sample((self.totalNeurons[i + 1], self.totalNeurons[i])) - 500
-            self.weights.append(tempw)
-            tempb = 1000 * np.random.random_sample((self.totalNeurons[i + 1])) - 500
-            self.biases.append(tempb)
 
     # Draws the net using pygame
     def drawnet(self, screen, width, height, offsetx, offsety):
