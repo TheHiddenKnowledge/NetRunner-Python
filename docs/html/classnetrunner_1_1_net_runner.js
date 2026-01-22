@@ -1,0 +1,25 @@
+var classnetrunner_1_1_net_runner =
+[
+    [ "__init__", "classnetrunner_1_1_net_runner.html#a7307dfe5b39c75545ff26a9cea5fdb83", null ],
+    [ "get_active_derivative", "classnetrunner_1_1_net_runner.html#a8e2315427cc90925ace3728c513a0d36", null ],
+    [ "get_gradients", "classnetrunner_1_1_net_runner.html#aef3a3c13de3b6ca1faeb55d5d2897636", null ],
+    [ "loadnet", "classnetrunner_1_1_net_runner.html#a91dc295678d4d71f4e3f79d3b0295c19", null ],
+    [ "randomize_net", "classnetrunner_1_1_net_runner.html#a0f0d5cd8678cdfee2e6161b5ab4aacb5", null ],
+    [ "run_net", "classnetrunner_1_1_net_runner.html#aab297b2b85035a538a3787f409deb2fc", null ],
+    [ "savenet", "classnetrunner_1_1_net_runner.html#ae30ccb373ce29b29aa4d6a75ba1851b2", null ],
+    [ "use_active_function", "classnetrunner_1_1_net_runner.html#a6bdaca29f6b6a36b4847c1fee6c55d8b", null ],
+    [ "use_gradient_descent", "classnetrunner_1_1_net_runner.html#a2c8750fff5b8e9599b49b7c03ce42c90", null ],
+    [ "activation", "classnetrunner_1_1_net_runner.html#a092be0592210521a3e94a15982d99fab", null ],
+    [ "active_derivatives", "classnetrunner_1_1_net_runner.html#af6149d6a7f0f93cba42d5b6fd8eed118", null ],
+    [ "alpha", "classnetrunner_1_1_net_runner.html#a017ef28f1940a6bd2371170ebeec7da7", null ],
+    [ "beta", "classnetrunner_1_1_net_runner.html#acad65c6797edb5b21dc31870a4d0b0d9", null ],
+    [ "bias_gradient", "classnetrunner_1_1_net_runner.html#a87c1a36f9c710f9e51957a9212146b8c", null ],
+    [ "biases", "classnetrunner_1_1_net_runner.html#a48abc43d8e92e945cff25bf783ec5c9d", null ],
+    [ "neuron_counts", "classnetrunner_1_1_net_runner.html#abfff1a131ff8d3bbbc4d52bb40c9d20d", null ],
+    [ "neuron_values", "classnetrunner_1_1_net_runner.html#a0290b87b29edb8ed57b95f8a85717bb2", null ],
+    [ "pre_active_values", "classnetrunner_1_1_net_runner.html#a5534b8bc49207d290f76069e84da8d1f", null ],
+    [ "prev_avg_bias_gradient", "classnetrunner_1_1_net_runner.html#a498e9cc7e2316f6c18a8f7dbc44416ac", null ],
+    [ "prev_avg_weight_gradient", "classnetrunner_1_1_net_runner.html#a51bb2c7f8dafbebbbb146c8c57441af8", null ],
+    [ "weight_gradient", "classnetrunner_1_1_net_runner.html#ac5329182cb854872df8cae52b9f59d52", null ],
+    [ "weights", "classnetrunner_1_1_net_runner.html#a72dec3365f20558273e5b1105e8b7c96", null ]
+];
