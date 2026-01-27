@@ -14,6 +14,8 @@
 
 import numpy as np
 import copy
+import random as rnd
+import math
 
 ## @class NetError
 # @brief Exception class for custom error handling
@@ -54,7 +56,7 @@ class NetLayer:
     # @param layer_values Layer values to be assigned
     # @return None
     def set_layer_values(self, layer_values):
-        self.original_values = layer_values
+        self.original_values = layer_values.copy()
         self.use_active_functions()
         self.get_active_derivatives()
 
@@ -62,7 +64,7 @@ class NetLayer:
     # @return None
     def use_active_functions(self):
         if self.activation == 'input':
-            self.active_values = self.original_values
+            self.active_values = self.original_values.copy()
         elif self.activation == 'sigmoid':
             self.active_values = 1 / (1 + np.exp(-self.original_values))
         elif self.activation == 'tanh':
@@ -93,183 +95,276 @@ class NetLayer:
 # @brief Contains methods and attributes used for implementing and training a
 # neural net.
 class NetRunner:
-    ## @param net_layers Array of NetLayer objects
+    ## @param net_layers List of NetLayer objects
     def __init__(self, net_layers):
-        ## @brief Array of NetLayer objects
+        ## @brief List of NetLayer objects
         # @hideinitializer
-        self.net_layers = net_layers
-
-        # Checks to see if there is an input layer present
-        has_input = False
-        for net_layer in self.net_layers:
-            if net_layer.activation == 'input':
-                has_input = True
-        if not has_input:
-            raise NetError(self, "Input layer not present.")
+        self.__net_layers = copy.deepcopy(net_layers)
+        self.__check_net()
 
         ## @brief Weights used to transform the values from one layer into
         # another
         # @hideinitializer
-        self.weights = []
-        for a in range(len(self.net_layers) - 1):
-            neuron_count = self.net_layers[a].neuron_count
-            next_neuron_count = self.net_layers[a + 1].neuron_count
-            self.weights.append(np.zeros((next_neuron_count, neuron_count)))
+        self.__weights = []
+        for a in range(len(self.__net_layers) - 1):
+            neuron_count = self.__net_layers[a].neuron_count
+            next_neuron_count = self.__net_layers[a + 1].neuron_count
+            self.__weights.append(np.zeros((next_neuron_count, neuron_count)))
         ## @brief Biases applied to each layer output after transformation
         # @hideinitializer
-        self.biases = []
-        for a in range(len(self.net_layers) - 1):
-            next_neuron_count = self.net_layers[a + 1].neuron_count
-            self.biases.append(np.zeros((next_neuron_count, 1)))
+        self.__biases = []
+        for a in range(len(self.__net_layers) - 1):
+            next_neuron_count = self.__net_layers[a + 1].neuron_count
+            self.__biases.append(np.zeros((next_neuron_count, 1)))
         ## @brief Gradient for all weights
         # @hideinitializer
-        self.weight_gradient = copy.deepcopy(self.weights)
+        self.__weight_gradient = copy.deepcopy(self.__weights)
         ## @brief Gradient for all biases
         # @hideinitializer
-        self.bias_gradient = copy.deepcopy(self.biases)
+        self.__bias_gradient = copy.deepcopy(self.__biases)
 
-        ## @brief Previous average gradient for all weights
+        ## @brief Previous average gradient velocity for all weights
         # @hideinitializer
-        self.prev_weight_velocity = copy.deepcopy(self.weights)
-        ## @brief Previous average gradient for all biases
+        self.__prev_weight_velocity = copy.deepcopy(self.__weights)
+        ## @brief Previous average gradient velocity for all biases
         # @hideinitializer
-        self.prev_bias_velocity = copy.deepcopy(self.biases)
+        self.__prev_bias_velocity = copy.deepcopy(self.__biases)
 
-        self.initialize_net()
+        ## @brief Learning rate used for gradient descent
+        # @hideinitializer
+        self.__rate = 0
+        ## @brief Velocity utilization factor for gradient descent
+        # @hideinitializer
+        self.__beta = 0
 
-    ## @brief Initialize the weights and biases of the neural net.
+        ## @brief Size of the mini batch
+        # @hideinitializer
+        self.__mini_batch_size = 0
+        ## @brief Maximum index used for looping through the mini batches
+        # @hideinitializer
+        self.__mini_batch_max_index = 0
+        ## @brief Current epoch count
+        # @hideinitializer
+        self.__epoch = 0
+
+    ## @brief Checks the layers of the neural net to see if the net is valid.
     # @return None
-    def initialize_net(self):
-        for weight in self.weights:
+    def __check_net(self):
+        # The minimum layer count is 2
+        if len(self.__net_layers) < 2:
+            raise NetError(self, "Layer count is less than 2.")
+        # Checking for the input layer
+        input_index = -1
+        for a in range(len(self.__net_layers)):
+            net_layer = self.__net_layers[a]
+            if net_layer.activation == 'input':
+                input_index = a
+        if input_index < 0:
+            raise NetError(self, "Input layer not present.")
+        elif input_index > 0:
+            raise NetError(self, "Input layer is not at the right position.")
+
+    ## @brief Resizes the neural net given the new layers list.
+    # @param net_layers New list of NetLayer objects
+    # @return None
+    def resize_net(self, net_layers):
+        has_resized = False
+        # Checking if the neural net has resized
+        if len(net_layers) != len(self.__net_layers):
+            has_resized = True
+        else:
+            for a in range(len(net_layers)):
+                new_neuron_count = net_layers[a].neuron_count
+                old_neuron_count = self.__net_layers[a].neuron_count
+                if new_neuron_count != old_neuron_count:
+                    has_resized = True
+                    break
+        # Resizing neural net parameters
+        if has_resized:
+            self.__net_layers = copy.deepcopy(net_layers)
+            self.__check_net()
+
+            self.__weights = []
+            for a in range(len(self.__net_layers) - 1):
+                neuron_count = self.__net_layers[a].neuron_count
+                next_neuron_count = self.__net_layers[a + 1].neuron_count
+                self.__weights.append(
+                    np.zeros((next_neuron_count, neuron_count)))
+            self.__biases = []
+            for a in range(len(self.__net_layers) - 1):
+                next_neuron_count = self.__net_layers[a + 1].neuron_count
+                self.__biases.append(np.zeros((next_neuron_count, 1)))
+            self.__weight_gradient = copy.deepcopy(self.__weights)
+            self.__bias_gradient = copy.deepcopy(self.__biases)
+            self.__prev_weight_velocity = copy.deepcopy(self.__weights)
+            self.__prev_bias_velocity = copy.deepcopy(self.__biases)
+
+    ## @brief Initializes the weights and biases of the neural net.
+    # @return None
+    def init_net(self):
+        for weight in self.__weights:
             variance = 1 / weight.shape[1]
             random_weight = np.random.uniform(-variance, variance, weight.shape)
             np.copyto(weight, random_weight)
-        for bias in self.biases:
+        for bias in self.__biases:
             bias.fill(0)
 
-    ## @brief Runs the neural net given an input array
-    # @param net_input Input for the neural net (inputted as a list)
+    ## @brief Forward passes the neural net given an input array
+    # @param net_input Input for the neural net
     # @return Output values of neural net
-    def run_net(self, net_input):
-        self.net_layers[0].set_layer_values(np.array(net_input).reshape(-1, 1))
-        for a in range(len(self.weights)):
-            current_values = self.net_layers[a].active_values
+    def forward_pass(self, net_input):
+        self.__net_layers[0].set_layer_values(net_input)
+        for a in range(len(self.__weights)):
+            current_values = self.__net_layers[a].active_values
             # Transforming the previous layer into the next layer
-            next_values = (np.matmul(self.weights[a], current_values)
-                          + self.biases[a])
-            self.net_layers[a + 1].set_layer_values(next_values)
+            next_values = (np.matmul(self.__weights[a], current_values)
+                          + self.__biases[a])
+            self.__net_layers[a + 1].set_layer_values(next_values)
         # Returns the last layer (output)
-        return self.net_layers[-1].active_values
+        return self.__net_layers[-1].active_values
 
     ## @brief Gets the gradients for the weights and biases
     # @param expected_output The expected output for the training example
-    # (inputted as a list)
     # @return None
-    def get_gradients(self, expected_output):
-        expected_array = np.array(expected_output).reshape(-1, 1)
+    def __get_gradients(self, expected_output):
         # List of layer derivatives with respect to cost
         # (used for backpropagation)
         layer_derivatives = []
-        for net_layer in self.net_layers:
+        for net_layer in self.__net_layers:
             layer_derivatives.append(np.zeros_like(net_layer.original_values))
-        for a in reversed(range(len(self.weights))):
-            active_values = self.net_layers[a].active_values
-            next_active_values = self.net_layers[a + 1].active_values
-            next_active_derivatives = self.net_layers[a + 1].active_derivatives
-            for b in range(self.weights[a].shape[0]):
+        for a in reversed(range(len(self.__weights))):
+            active_values = self.__net_layers[a].active_values
+            next_active_values = self.__net_layers[a + 1].active_values
+            next_active_derivatives = self.__net_layers[a + 1].active_derivatives
+            for b in range(self.__weights[a].shape[0]):
                 # Getting bias gradient for last hidden layer
-                if a == len(self.weights) - 1:
-                    self.bias_gradient[a][b] = (
+                if a == len(self.__weights) - 1:
+                    self.__bias_gradient[a][b] = (
                         next_active_derivatives[b][0]
                         * 2 * (next_active_values[b][0]
-                               - expected_array[b][0])
+                               - expected_output[b][0])
                     )
                 # Getting bias gradient used backpropagation
                 else:
-                    self.bias_gradient[a][b] = (
+                    self.__bias_gradient[a][b] = (
                         next_active_derivatives[b][0]
                         * layer_derivatives[a + 1][b][0]
                     )
-                for c in range(self.weights[a].shape[1]):
-                    if a == len(self.weights) - 1:
+                for c in range(self.__weights[a].shape[1]):
+                    if a == len(self.__weights) - 1:
                         # Getting weight gradient for last hidden layer
-                        self.weight_gradient[a][b][c] = (
+                        self.__weight_gradient[a][b][c] = (
                             active_values[c][0]
                             * next_active_derivatives[b][0]
                             * 2 * (next_active_values[b][0]
-                                   - expected_array[b][0])
+                                   - expected_output[b][0])
                         )
                         # Calculating layer derivatives with respect to cost
                         layer_derivatives[a][c][0] += (
-                            self.weights[a][b][c]
+                            self.__weights[a][b][c]
                             * next_active_derivatives[b][0]
                             * 2 * (next_active_values[b][0]
-                                   - expected_array[b][0])
+                                   - expected_output[b][0])
                         )
                     else:
                         # Getting weight gradient using backpropagation
-                        self.weight_gradient[a][b][c] = (
+                        self.__weight_gradient[a][b][c] = (
                             active_values[c][0]
                             * next_active_derivatives[b][0]
                             * layer_derivatives[a + 1][b][0]
                         )
                         # Calculating layer derivatives with respect to cost
                         layer_derivatives[a][c][0] += (
-                            self.weights[a][b][c]
+                            self.__weights[a][b][c]
                             * next_active_derivatives[b][0]
                             * layer_derivatives[a + 1][b][0]
                         )
 
-    ## @brief Performs gradient descent on the neural net
-    # @param input_set Set of input values
-    # @param expected_set Set of expected output values
-    # @param rate Learning rate for the neural net
-    # @param beta Velocity utilization constant
+    ## @brief Initializes the neural net runner.
+    # @param rate Learning rate
+    # @param beta Velocity utilization factor
     # @return None
-    def step_gradient_descent(self, input_set, expected_set, rate, beta):
+    def init_runner(self, rate, beta):
+        self.__rate = rate
         if beta > 1 or beta < 0:
-            raise NetError(beta, 'Beta must be between 0 and 1')
-        avg_weight_gradient = copy.deepcopy(self.weights)
-        avg_bias_gradient = copy.deepcopy(self.biases)
-        for a in range(len(self.weights)):
+            raise NetError(self.__beta, 'Beta must be between 0 and 1.')
+        self.__beta = beta
+        self.__epoch = 0
+
+    ## @brief Initializes mini batch parameters.
+    # @param batch The whole batch of training examples
+    # @param mini_batch_size The size of a mini batch
+    # @param is_shuffled Shuffles the batch if true
+    # @return None
+    def init_mini_batch(self, batch, mini_batch_size, is_shuffled):
+        batch_size = len(batch)
+        if mini_batch_size > batch_size:
+            raise NetError(self.__mini_batch_size, 'Mini batch size must be '
+                                                   'less than the batch size.')
+        if is_shuffled:
+            rnd.shuffle(batch)
+        self.__mini_batch_size = mini_batch_size
+        self.__mini_batch_max_index = math.ceil(batch_size
+                                                / self.__mini_batch_size)
+
+    ## @brief Performs gradient descent on the mini batch.
+    # @param mini_batch The mini batch of training examples
+    # @return The average cost value of the mini batch
+    def __step_mini_batch(self, mini_batch):
+        avg_weight_gradient = copy.deepcopy(self.__weights)
+        avg_bias_gradient = copy.deepcopy(self.__biases)
+        for a in range(len(self.__weights)):
             avg_weight_gradient[a].fill(0)
             avg_bias_gradient[a].fill(0)
         avg_cost = 0
-        for a in range(len(input_set)):
-            self.run_net(input_set[a])
-            self.get_gradients(expected_set[a])
-            for b in range(len(self.weights)):
-                avg_weight_gradient[b] += (self.weight_gradient[b]
-                                           / len(expected_set))
-                avg_bias_gradient[b] += (self.bias_gradient[b]
-                                         / len(expected_set))
+        for a in range(len(mini_batch)):
+            self.forward_pass(mini_batch[a][0])
+            self.__get_gradients(mini_batch[a][1])
+            for b in range(len(self.__weights)):
+                avg_weight_gradient[b] += (self.__weight_gradient[b]
+                                           / len(mini_batch))
+                avg_bias_gradient[b] += (self.__bias_gradient[b]
+                                         / len(mini_batch))
             cost = 0
-            for b in range(len(expected_set[a])):
-                output_values = self.net_layers[-1].active_values
-                cost += (output_values[b][0] - expected_set[a][b]) ** 2
-            avg_cost += cost / len(expected_set)
+            for b in range(len(mini_batch[a][1])):
+                output_values = self.__net_layers[-1].active_values
+                cost += (output_values[b][0] - mini_batch[a][1][b][0]) ** 2
+            avg_cost += cost / len(mini_batch)
         # Descending the gradient using the momentum theorem for neural nets
-        for a in range(len(self.weights)):
-            weight_velocity = (beta * self.prev_weight_velocity[a]
-                               + (1 - beta) * avg_weight_gradient[a])
-            bias_veloctiy = (beta * self.prev_bias_velocity[a]
-                             + (1 - beta) * avg_bias_gradient[a])
-            self.weights[a] -= rate * weight_velocity
-            self.biases[a] -= rate * bias_veloctiy
-            np.copyto(self.prev_weight_velocity[a], weight_velocity)
-            np.copyto(self.prev_bias_velocity[a], bias_veloctiy)
+        for a in range(len(self.__weights)):
+            weight_velocity = (self.__beta * self.__prev_weight_velocity[a]
+                               + (1 - self.__beta) * avg_weight_gradient[a])
+            bias_veloctiy = (self.__beta * self.__prev_bias_velocity[a]
+                             + (1 - self.__beta) * avg_bias_gradient[a])
+            self.__weights[a] -= self.__rate * weight_velocity
+            self.__biases[a] -= self.__rate * bias_veloctiy
+            np.copyto(self.__prev_weight_velocity[a], weight_velocity)
+            np.copyto(self.__prev_bias_velocity[a], bias_veloctiy)
         return avg_cost
+
+    ## @brief Performs gradient descent on all mini batches in the epoch.
+    # @param batch The whole batch of training examples
+    # @return The final average cost and the epoch count
+    def step_epoch(self, batch):
+        avg_cost = 0
+        for a in range(self.__mini_batch_max_index):
+            start_idx = a * self.__mini_batch_size
+            end_idx = (a + 1) * self.__mini_batch_size - 1
+            mini_batch = batch[start_idx:end_idx]
+            avg_cost = self.__step_mini_batch(mini_batch)
+        self.__epoch += 1
+        return avg_cost, self.__epoch
 
     ## @brief Loads neural net from a npz file
     # @param file File name
     # @return None
     def loadnet(self, file):
         if len(np.load(file + '.npz', allow_pickle=True).files) > 1:
-            self.weights = np.load(file + '.npz', allow_pickle=True)['arr_0']
-            self.biases = np.load(file + '.npz', allow_pickle=True)['arr_1']
+            self.__weights = np.load(file + '.npz', allow_pickle=True)['arr_0']
+            self.__biases = np.load(file + '.npz', allow_pickle=True)['arr_1']
 
     ## @brief Save neural net to a npz file
     # @param file File name
     # @return None
     def savenet(self, file):
-        np.savez(file, self.weights, self.biases, fmt='%s')
+        np.savez(file, self.__weights, self.__biases, fmt='%s')
