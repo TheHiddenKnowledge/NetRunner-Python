@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['randomize_5fnet_0',['randomize_net',['../classnetrunner_1_1_net_runner.html#a0f0d5cd8678cdfee2e6161b5ab4aacb5',1,'netrunner::NetRunner']]],
-  ['run_5fnet_1',['run_net',['../classnetrunner_1_1_net_runner.html#aab297b2b85035a538a3787f409deb2fc',1,'netrunner::NetRunner']]]
+  ['original_5fvalues_0',['original_values',['../classnetrunner_1_1_net_layer.html#a08bf4de52d2318ba75ce2a287acc1bf8',1,'netrunner::NetLayer']]]
 ];

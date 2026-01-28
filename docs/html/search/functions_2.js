@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loadnet_0',['loadnet',['../classnetrunner_1_1_net_runner.html#a91dc295678d4d71f4e3f79d3b0295c19',1,'netrunner::NetRunner']]]
+  ['get_5factive_5fderivatives_0',['get_active_derivatives',['../classnetrunner_1_1_net_layer.html#aa7103ad5bb0f7ef523c28fdb26e98151',1,'netrunner::NetLayer']]]
 ];

@@ -2,12 +2,12 @@
 # This project aims to create a neural net library based in python that can
 # be used for various applications in other projects.
 # @par Latest Release:
-# V1.2 - 1/17/2026
+# V1.2 - 1/27/2026
 # @par Created by: I. Finney
 # @par Revision History:
 # @version 1.0 Initial release.
 # @version 1.1 Added gradient descent.
-# @version 1.2
+# @version 1.2 Refactored codebase and added mini batches.
 
 ## @file netrunner.py
 # @brief Implements a functional neural net library.

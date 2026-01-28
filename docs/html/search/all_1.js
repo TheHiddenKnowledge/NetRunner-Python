@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['activation_0',['activation',['../classnetrunner_1_1_net_runner.html#a092be0592210521a3e94a15982d99fab',1,'netrunner::NetRunner']]],
-  ['active_5fderivatives_1',['active_derivatives',['../classnetrunner_1_1_net_runner.html#af6149d6a7f0f93cba42d5b6fd8eed118',1,'netrunner::NetRunner']]],
-  ['alpha_2',['alpha',['../classnetrunner_1_1_net_runner.html#a017ef28f1940a6bd2371170ebeec7da7',1,'netrunner::NetRunner']]]
+  ['activation_0',['activation',['../classnetrunner_1_1_net_layer.html#afe9f48e7d5d1580f6f73b740aefd64c4',1,'netrunner::NetLayer']]],
+  ['active_5fderivatives_1',['active_derivatives',['../classnetrunner_1_1_net_layer.html#af44d5acab974cae71487b9087a12eaaf',1,'netrunner::NetLayer']]],
+  ['active_5fvalues_2',['active_values',['../classnetrunner_1_1_net_layer.html#a7fa18fd211bc5cb6dc7792d6a2f12c48',1,'netrunner::NetLayer']]]
 ];

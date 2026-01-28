@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['pre_5factive_5fvalues_0',['pre_active_values',['../classnetrunner_1_1_net_runner.html#a5534b8bc49207d290f76069e84da8d1f',1,'netrunner::NetRunner']]],
-  ['prev_5favg_5fbias_5fgradient_1',['prev_avg_bias_gradient',['../classnetrunner_1_1_net_runner.html#a498e9cc7e2316f6c18a8f7dbc44416ac',1,'netrunner::NetRunner']]],
-  ['prev_5favg_5fweight_5fgradient_2',['prev_avg_weight_gradient',['../classnetrunner_1_1_net_runner.html#a51bb2c7f8dafbebbbb146c8c57441af8',1,'netrunner::NetRunner']]],
-  ['python_3',['NetRunner - Python',['../index.html',1,'']]]
+  ['neterror_0',['NetError',['../classnetrunner_1_1_net_error.html',1,'netrunner']]],
+  ['netlayer_1',['NetLayer',['../classnetrunner_1_1_net_layer.html',1,'netrunner']]],
+  ['netrunner_2',['NetRunner',['../classnetrunner_1_1_net_runner.html',1,'netrunner']]],
+  ['netrunner_20python_3',['NetRunner - Python',['../index.html',1,'']]],
+  ['netrunner_2epy_4',['netrunner.py',['../netrunner_8py.html',1,'']]],
+  ['neuron_5fcount_5',['neuron_count',['../classnetrunner_1_1_net_layer.html#a0dfad11915d6e6598fa2d22773dc3437',1,'netrunner::NetLayer']]]
 ];

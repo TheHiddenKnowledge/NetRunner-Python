@@ -97,60 +97,67 @@ $(function(){initNavTree('classnetrunner_1_1_net_runner.html','','classnetrunner
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7307dfe5b39c75545ff26a9cea5fdb83" id="r_a7307dfe5b39c75545ff26a9cea5fdb83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7307dfe5b39c75545ff26a9cea5fdb83">__init__</a> (self, <a class="el" href="#abfff1a131ff8d3bbbc4d52bb40c9d20d">neuron_counts</a>, <a class="el" href="#a092be0592210521a3e94a15982d99fab">activation</a>, <a class="el" href="#a017ef28f1940a6bd2371170ebeec7da7">alpha</a>, <a class="el" href="#acad65c6797edb5b21dc31870a4d0b0d9">beta</a>)</td></tr>
-<tr class="memitem:a0f0d5cd8678cdfee2e6161b5ab4aacb5" id="r_a0f0d5cd8678cdfee2e6161b5ab4aacb5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f0d5cd8678cdfee2e6161b5ab4aacb5">randomize_net</a> (self, min_value, max_value)</td></tr>
-<tr class="memdesc:a0f0d5cd8678cdfee2e6161b5ab4aacb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Randomizes the weights and biases of the neural net.  <br /></td></tr>
-<tr class="memitem:aab297b2b85035a538a3787f409deb2fc" id="r_aab297b2b85035a538a3787f409deb2fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab297b2b85035a538a3787f409deb2fc">run_net</a> (self, net_input)</td></tr>
-<tr class="memdesc:aab297b2b85035a538a3787f409deb2fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the neural net given an input array.  <br /></td></tr>
-<tr class="memitem:a6bdaca29f6b6a36b4847c1fee6c55d8b" id="r_a6bdaca29f6b6a36b4847c1fee6c55d8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6bdaca29f6b6a36b4847c1fee6c55d8b">use_active_function</a> (self, layer_values)</td></tr>
-<tr class="memdesc:a6bdaca29f6b6a36b4847c1fee6c55d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the applicable activation function.  <br /></td></tr>
-<tr class="memitem:a8e2315427cc90925ace3728c513a0d36" id="r_a8e2315427cc90925ace3728c513a0d36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e2315427cc90925ace3728c513a0d36">get_active_derivative</a> (self, layer_values)</td></tr>
-<tr class="memdesc:a8e2315427cc90925ace3728c513a0d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the derivatives for the applicable activation function.  <br /></td></tr>
-<tr class="memitem:aef3a3c13de3b6ca1faeb55d5d2897636" id="r_aef3a3c13de3b6ca1faeb55d5d2897636"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef3a3c13de3b6ca1faeb55d5d2897636">get_gradients</a> (self, expected_output)</td></tr>
-<tr class="memdesc:aef3a3c13de3b6ca1faeb55d5d2897636"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the gradients for the weights and biases.  <br /></td></tr>
-<tr class="memitem:a2c8750fff5b8e9599b49b7c03ce42c90" id="r_a2c8750fff5b8e9599b49b7c03ce42c90"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8750fff5b8e9599b49b7c03ce42c90">use_gradient_descent</a> (self, input_set, expected_set)</td></tr>
-<tr class="memdesc:a2c8750fff5b8e9599b49b7c03ce42c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs gradient descent on the nerual net.  <br /></td></tr>
+<tr class="memitem:a6e05848a66b7d99447c1b4bcf34a02a7" id="r_a6e05848a66b7d99447c1b4bcf34a02a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e05848a66b7d99447c1b4bcf34a02a7">__init__</a> (self, net_layers)</td></tr>
+<tr class="memitem:a0e0a79e0e2db43ec3fbca6253f1cc9a3" id="r_a0e0a79e0e2db43ec3fbca6253f1cc9a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e0a79e0e2db43ec3fbca6253f1cc9a3">resize_net</a> (self, net_layers)</td></tr>
+<tr class="memdesc:a0e0a79e0e2db43ec3fbca6253f1cc9a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes the neural net given the new layers list.  <br /></td></tr>
+<tr class="memitem:a4bc89d598f760a4bac5e5a4566158519" id="r_a4bc89d598f760a4bac5e5a4566158519"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4bc89d598f760a4bac5e5a4566158519">init_net</a> (self)</td></tr>
+<tr class="memdesc:a4bc89d598f760a4bac5e5a4566158519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the weights and biases of the neural net.  <br /></td></tr>
+<tr class="memitem:a79c4f054cb10a312a39ecff0a7c4929c" id="r_a79c4f054cb10a312a39ecff0a7c4929c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79c4f054cb10a312a39ecff0a7c4929c">forward_pass</a> (self, net_input)</td></tr>
+<tr class="memdesc:a79c4f054cb10a312a39ecff0a7c4929c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward passes the neural net given an input array.  <br /></td></tr>
+<tr class="memitem:a746cc8c7e6c9a0300dc414859a732219" id="r_a746cc8c7e6c9a0300dc414859a732219"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a746cc8c7e6c9a0300dc414859a732219">init_runner</a> (self, rate, beta)</td></tr>
+<tr class="memdesc:a746cc8c7e6c9a0300dc414859a732219"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the neural net runner.  <br /></td></tr>
+<tr class="memitem:a9e79834c04638a715a83888b3b4c01e3" id="r_a9e79834c04638a715a83888b3b4c01e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e79834c04638a715a83888b3b4c01e3">init_mini_batch</a> (self, batch, mini_batch_size, is_shuffled)</td></tr>
+<tr class="memdesc:a9e79834c04638a715a83888b3b4c01e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes mini batch parameters.  <br /></td></tr>
+<tr class="memitem:a8f881657bb8bcb7503fab88d92e0e84f" id="r_a8f881657bb8bcb7503fab88d92e0e84f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f881657bb8bcb7503fab88d92e0e84f">step_epoch</a> (self, batch)</td></tr>
+<tr class="memdesc:a8f881657bb8bcb7503fab88d92e0e84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs gradient descent on all mini batches in the epoch.  <br /></td></tr>
 <tr class="memitem:a91dc295678d4d71f4e3f79d3b0295c19" id="r_a91dc295678d4d71f4e3f79d3b0295c19"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91dc295678d4d71f4e3f79d3b0295c19">loadnet</a> (self, file)</td></tr>
 <tr class="memdesc:a91dc295678d4d71f4e3f79d3b0295c19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads neural net from a npz file.  <br /></td></tr>
 <tr class="memitem:ae30ccb373ce29b29aa4d6a75ba1851b2" id="r_ae30ccb373ce29b29aa4d6a75ba1851b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae30ccb373ce29b29aa4d6a75ba1851b2">savenet</a> (self, file)</td></tr>
 <tr class="memdesc:ae30ccb373ce29b29aa4d6a75ba1851b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save neural net to a npz file.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:abfff1a131ff8d3bbbc4d52bb40c9d20d" id="r_abfff1a131ff8d3bbbc4d52bb40c9d20d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfff1a131ff8d3bbbc4d52bb40c9d20d">neuron_counts</a></td></tr>
-<tr class="memdesc:abfff1a131ff8d3bbbc4d52bb40c9d20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Neuron count in each layer.  <br /></td></tr>
-<tr class="memitem:a5534b8bc49207d290f76069e84da8d1f" id="r_a5534b8bc49207d290f76069e84da8d1f"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5534b8bc49207d290f76069e84da8d1f">pre_active_values</a></td></tr>
-<tr class="memdesc:a5534b8bc49207d290f76069e84da8d1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Layer values before activation.  <br /></td></tr>
-<tr class="memitem:a0290b87b29edb8ed57b95f8a85717bb2" id="r_a0290b87b29edb8ed57b95f8a85717bb2"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0290b87b29edb8ed57b95f8a85717bb2">neuron_values</a></td></tr>
-<tr class="memdesc:a0290b87b29edb8ed57b95f8a85717bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output values for each layer.  <br /></td></tr>
-<tr class="memitem:af6149d6a7f0f93cba42d5b6fd8eed118" id="r_af6149d6a7f0f93cba42d5b6fd8eed118"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6149d6a7f0f93cba42d5b6fd8eed118">active_derivatives</a></td></tr>
-<tr class="memdesc:af6149d6a7f0f93cba42d5b6fd8eed118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acitvation function derivatives.  <br /></td></tr>
-<tr class="memitem:a092be0592210521a3e94a15982d99fab" id="r_a092be0592210521a3e94a15982d99fab"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a092be0592210521a3e94a15982d99fab">activation</a></td></tr>
-<tr class="memdesc:a092be0592210521a3e94a15982d99fab"><td class="mdescLeft">&#160;</td><td class="mdescRight">String declaring which activation function to use.  <br /></td></tr>
-<tr class="memitem:a72dec3365f20558273e5b1105e8b7c96" id="r_a72dec3365f20558273e5b1105e8b7c96"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72dec3365f20558273e5b1105e8b7c96">weights</a></td></tr>
-<tr class="memdesc:a72dec3365f20558273e5b1105e8b7c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weights used to transform the values from one layer into another.  <br /></td></tr>
-<tr class="memitem:a48abc43d8e92e945cff25bf783ec5c9d" id="r_a48abc43d8e92e945cff25bf783ec5c9d"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48abc43d8e92e945cff25bf783ec5c9d">biases</a></td></tr>
-<tr class="memdesc:a48abc43d8e92e945cff25bf783ec5c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Biases applied to each layer output after transformation.  <br /></td></tr>
-<tr class="memitem:ac5329182cb854872df8cae52b9f59d52" id="r_ac5329182cb854872df8cae52b9f59d52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5329182cb854872df8cae52b9f59d52">weight_gradient</a></td></tr>
-<tr class="memdesc:ac5329182cb854872df8cae52b9f59d52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient for all weights.  <br /></td></tr>
-<tr class="memitem:a87c1a36f9c710f9e51957a9212146b8c" id="r_a87c1a36f9c710f9e51957a9212146b8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87c1a36f9c710f9e51957a9212146b8c">bias_gradient</a></td></tr>
-<tr class="memdesc:a87c1a36f9c710f9e51957a9212146b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient for all biases.  <br /></td></tr>
-<tr class="memitem:a017ef28f1940a6bd2371170ebeec7da7" id="r_a017ef28f1940a6bd2371170ebeec7da7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a017ef28f1940a6bd2371170ebeec7da7">alpha</a></td></tr>
-<tr class="memdesc:a017ef28f1940a6bd2371170ebeec7da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alpha value using in momentum based gradient descent.  <br /></td></tr>
-<tr class="memitem:acad65c6797edb5b21dc31870a4d0b0d9" id="r_acad65c6797edb5b21dc31870a4d0b0d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acad65c6797edb5b21dc31870a4d0b0d9">beta</a></td></tr>
-<tr class="memdesc:acad65c6797edb5b21dc31870a4d0b0d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Beta value using in momentum based gradient descent.  <br /></td></tr>
-<tr class="memitem:a51bb2c7f8dafbebbbb146c8c57441af8" id="r_a51bb2c7f8dafbebbbb146c8c57441af8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51bb2c7f8dafbebbbb146c8c57441af8">prev_avg_weight_gradient</a></td></tr>
-<tr class="memdesc:a51bb2c7f8dafbebbbb146c8c57441af8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous average gradient for all weights.  <br /></td></tr>
-<tr class="memitem:a498e9cc7e2316f6c18a8f7dbc44416ac" id="r_a498e9cc7e2316f6c18a8f7dbc44416ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a498e9cc7e2316f6c18a8f7dbc44416ac">prev_avg_bias_gradient</a></td></tr>
-<tr class="memdesc:a498e9cc7e2316f6c18a8f7dbc44416ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous average gradient for all biases.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a977f6c7caa22fb1679b3e9de74388185" id="r_a977f6c7caa22fb1679b3e9de74388185"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a977f6c7caa22fb1679b3e9de74388185">__check_net</a> (self)</td></tr>
+<tr class="memdesc:a977f6c7caa22fb1679b3e9de74388185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the layers of the neural net to see if the net is valid.  <br /></td></tr>
+<tr class="memitem:a90cafb45a4f795ec74467379ecef915e" id="r_a90cafb45a4f795ec74467379ecef915e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90cafb45a4f795ec74467379ecef915e">__get_gradients</a> (self, expected_output)</td></tr>
+<tr class="memdesc:a90cafb45a4f795ec74467379ecef915e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the gradients for the weights and biases.  <br /></td></tr>
+<tr class="memitem:ad387e6f3c021d3ac213ca04476408e9b" id="r_ad387e6f3c021d3ac213ca04476408e9b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad387e6f3c021d3ac213ca04476408e9b">__step_mini_batch</a> (self, mini_batch)</td></tr>
+<tr class="memdesc:ad387e6f3c021d3ac213ca04476408e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs gradient descent on the mini batch.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a26757e8f2734e7a881498a23512bc780" id="r_a26757e8f2734e7a881498a23512bc780"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26757e8f2734e7a881498a23512bc780">__net_layers</a></td></tr>
+<tr class="memdesc:a26757e8f2734e7a881498a23512bc780"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of <a class="el" href="classnetrunner_1_1_net_layer.html" title="Contains methods and attributes for a neural net layer.">NetLayer</a> objects.  <br /></td></tr>
+<tr class="memitem:a2ea24e7e208e8413002ef1b4038205cd" id="r_a2ea24e7e208e8413002ef1b4038205cd"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ea24e7e208e8413002ef1b4038205cd">__weights</a></td></tr>
+<tr class="memdesc:a2ea24e7e208e8413002ef1b4038205cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weights used to transform the values from one layer into another.  <br /></td></tr>
+<tr class="memitem:a11fe39aed002127f2d1aa1b43560ff0d" id="r_a11fe39aed002127f2d1aa1b43560ff0d"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11fe39aed002127f2d1aa1b43560ff0d">__biases</a></td></tr>
+<tr class="memdesc:a11fe39aed002127f2d1aa1b43560ff0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Biases applied to each layer output after transformation.  <br /></td></tr>
+<tr class="memitem:a4a2e8589d1b746d5cdf4131d749cccc3" id="r_a4a2e8589d1b746d5cdf4131d749cccc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a2e8589d1b746d5cdf4131d749cccc3">__weight_gradient</a></td></tr>
+<tr class="memdesc:a4a2e8589d1b746d5cdf4131d749cccc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient for all weights.  <br /></td></tr>
+<tr class="memitem:a1f3113327c939628b6272b2e2659020f" id="r_a1f3113327c939628b6272b2e2659020f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f3113327c939628b6272b2e2659020f">__bias_gradient</a></td></tr>
+<tr class="memdesc:a1f3113327c939628b6272b2e2659020f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient for all biases.  <br /></td></tr>
+<tr class="memitem:ac4231421eac97310c934352210953a37" id="r_ac4231421eac97310c934352210953a37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4231421eac97310c934352210953a37">__prev_weight_velocity</a></td></tr>
+<tr class="memdesc:ac4231421eac97310c934352210953a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous average gradient velocity for all weights.  <br /></td></tr>
+<tr class="memitem:ac292d048d3688571d2247ce10f043471" id="r_ac292d048d3688571d2247ce10f043471"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac292d048d3688571d2247ce10f043471">__prev_bias_velocity</a></td></tr>
+<tr class="memdesc:ac292d048d3688571d2247ce10f043471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous average gradient velocity for all biases.  <br /></td></tr>
+<tr class="memitem:afd85855448bd94687681a0e20687fc35" id="r_afd85855448bd94687681a0e20687fc35"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd85855448bd94687681a0e20687fc35">__rate</a></td></tr>
+<tr class="memdesc:afd85855448bd94687681a0e20687fc35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Learning rate used for gradient descent.  <br /></td></tr>
+<tr class="memitem:acc6083b7c12cb5646a8697b2bdb963a4" id="r_acc6083b7c12cb5646a8697b2bdb963a4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc6083b7c12cb5646a8697b2bdb963a4">__beta</a></td></tr>
+<tr class="memdesc:acc6083b7c12cb5646a8697b2bdb963a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity utilization factor for gradient descent.  <br /></td></tr>
+<tr class="memitem:a45c7fc4841ce501bc28ddbfcdd1d4908" id="r_a45c7fc4841ce501bc28ddbfcdd1d4908"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45c7fc4841ce501bc28ddbfcdd1d4908">__mini_batch_size</a></td></tr>
+<tr class="memdesc:a45c7fc4841ce501bc28ddbfcdd1d4908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the mini batch.  <br /></td></tr>
+<tr class="memitem:a800c69e92097a086cc924b73d48da811" id="r_a800c69e92097a086cc924b73d48da811"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a800c69e92097a086cc924b73d48da811">__mini_batch_max_index</a></td></tr>
+<tr class="memdesc:a800c69e92097a086cc924b73d48da811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum index used for looping through the mini batches.  <br /></td></tr>
+<tr class="memitem:ab4c1507f3c7bf69c048424f617fa0561" id="r_ab4c1507f3c7bf69c048424f617fa0561"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4c1507f3c7bf69c048424f617fa0561">__epoch</a></td></tr>
+<tr class="memdesc:ab4c1507f3c7bf69c048424f617fa0561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current epoch count.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains methods and attributes used for implementing and training a neural net. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00022">22</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00097">97</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7307dfe5b39c75545ff26a9cea5fdb83" name="a7307dfe5b39c75545ff26a9cea5fdb83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7307dfe5b39c75545ff26a9cea5fdb83">&#9670;&#160;</a></span>__init__()</h2>
+<a id="a6e05848a66b7d99447c1b4bcf34a02a7" name="a6e05848a66b7d99447c1b4bcf34a02a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e05848a66b7d99447c1b4bcf34a02a7">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,80 +170,63 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>neuron_counts</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>activation</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>alpha</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>beta</em></span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>net_layers</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">neuron_count</td><td>Neuron count in each layer </td></tr>
-    <tr><td class="paramname">activation</td><td>String declaring which activation function to use </td></tr>
-    <tr><td class="paramname">alpha</td><td>Alpha value using in momentum based gradient descent </td></tr>
-    <tr><td class="paramname">beta</td><td>Beta value using in momentum based gradient descent </td></tr>
+    <tr><td class="paramname">net_layers</td><td>List of <a class="el" href="classnetrunner_1_1_net_layer.html" title="Contains methods and attributes for a neural net layer.">NetLayer</a> objects </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00027">27</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00099">99</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a8e2315427cc90925ace3728c513a0d36" name="a8e2315427cc90925ace3728c513a0d36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e2315427cc90925ace3728c513a0d36">&#9670;&#160;</a></span>get_active_derivative()</h2>
+<a id="a977f6c7caa22fb1679b3e9de74388185" name="a977f6c7caa22fb1679b3e9de74388185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a977f6c7caa22fb1679b3e9de74388185">&#9670;&#160;</a></span>__check_net()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.get_active_derivative </td>
+          <td class="memname">netrunner.NetRunner.__check_net </td>
           <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>layer_values</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Gets the derivatives for the applicable activation function. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">layer_values</td><td>Array of values for the layer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Array of activation function derivatives </dd></dl>
+<p>Checks the layers of the neural net to see if the net is valid. </p>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00130">130</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00152">152</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="aef3a3c13de3b6ca1faeb55d5d2897636" name="aef3a3c13de3b6ca1faeb55d5d2897636"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef3a3c13de3b6ca1faeb55d5d2897636">&#9670;&#160;</a></span>get_gradients()</h2>
+<a id="a90cafb45a4f795ec74467379ecef915e" name="a90cafb45a4f795ec74467379ecef915e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90cafb45a4f795ec74467379ecef915e">&#9670;&#160;</a></span>__get_gradients()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.get_gradients </td>
+          <td class="memname">netrunner.NetRunner.__get_gradients </td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
@@ -246,18 +236,199 @@ Public Attributes</h2></td></tr>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>expected_output</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Gets the gradients for the weights and biases. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">expected_output</td><td>The expected output for the training example (inputted as a list) </td></tr>
+    <tr><td class="paramname">expected_output</td><td>The expected output for the training example </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00145">145</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00229">229</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="ad387e6f3c021d3ac213ca04476408e9b" name="ad387e6f3c021d3ac213ca04476408e9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad387e6f3c021d3ac213ca04476408e9b">&#9670;&#160;</a></span>__step_mini_batch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">netrunner.NetRunner.__step_mini_batch </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>mini_batch</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Performs gradient descent on the mini batch. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mini_batch</td><td>The mini batch of training examples </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The average cost value of the mini batch </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00313">313</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="a79c4f054cb10a312a39ecff0a7c4929c" name="a79c4f054cb10a312a39ecff0a7c4929c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c4f054cb10a312a39ecff0a7c4929c">&#9670;&#160;</a></span>forward_pass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">netrunner.NetRunner.forward_pass </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>net_input</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Forward passes the neural net given an input array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">net_input</td><td>Input for the neural net </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Output values of neural net </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00215">215</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="a9e79834c04638a715a83888b3b4c01e3" name="a9e79834c04638a715a83888b3b4c01e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e79834c04638a715a83888b3b4c01e3">&#9670;&#160;</a></span>init_mini_batch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">netrunner.NetRunner.init_mini_batch </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>batch</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>mini_batch_size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>is_shuffled</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes mini batch parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">batch</td><td>The whole batch of training examples </td></tr>
+    <tr><td class="paramname">mini_batch_size</td><td>The size of a mini batch </td></tr>
+    <tr><td class="paramname">is_shuffled</td><td>Shuffles the batch if true </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00299">299</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="a4bc89d598f760a4bac5e5a4566158519" name="a4bc89d598f760a4bac5e5a4566158519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc89d598f760a4bac5e5a4566158519">&#9670;&#160;</a></span>init_net()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">netrunner.NetRunner.init_net </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the weights and biases of the neural net. </p>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00204">204</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="a746cc8c7e6c9a0300dc414859a732219" name="a746cc8c7e6c9a0300dc414859a732219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a746cc8c7e6c9a0300dc414859a732219">&#9670;&#160;</a></span>init_runner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">netrunner.NetRunner.init_runner </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>rate</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>beta</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the neural net runner. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rate</td><td>Learning rate </td></tr>
+    <tr><td class="paramname">beta</td><td>Velocity utilization factor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00287">287</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
@@ -289,77 +460,39 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00236">236</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00361">361</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a0f0d5cd8678cdfee2e6161b5ab4aacb5" name="a0f0d5cd8678cdfee2e6161b5ab4aacb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f0d5cd8678cdfee2e6161b5ab4aacb5">&#9670;&#160;</a></span>randomize_net()</h2>
+<a id="a0e0a79e0e2db43ec3fbca6253f1cc9a3" name="a0e0a79e0e2db43ec3fbca6253f1cc9a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e0a79e0e2db43ec3fbca6253f1cc9a3">&#9670;&#160;</a></span>resize_net()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.randomize_net </td>
+          <td class="memname">netrunner.NetRunner.resize_net </td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>min_value</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>max_value</em></span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>net_layers</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Randomizes the weights and biases of the neural net. </p>
+<p>Resizes the neural net given the new layers list. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">min_value</td><td>Minimum allowed value </td></tr>
-    <tr><td class="paramname">max_value</td><td>Maximum allowed value </td></tr>
+    <tr><td class="paramname">net_layers</td><td>New list of <a class="el" href="classnetrunner_1_1_net_layer.html" title="Contains methods and attributes for a neural net layer.">NetLayer</a> objects </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00084">84</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
-
-</div>
-</div>
-<a id="aab297b2b85035a538a3787f409deb2fc" name="aab297b2b85035a538a3787f409deb2fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab297b2b85035a538a3787f409deb2fc">&#9670;&#160;</a></span>run_net()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">netrunner.NetRunner.run_net </td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>net_input</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Runs the neural net given an input array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">net_input</td><td>Input for the neural net (inputted as a list) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Output values of neural net </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00097">97</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00170">170</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
@@ -391,312 +524,352 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00244">244</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00369">369</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a6bdaca29f6b6a36b4847c1fee6c55d8b" name="a6bdaca29f6b6a36b4847c1fee6c55d8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bdaca29f6b6a36b4847c1fee6c55d8b">&#9670;&#160;</a></span>use_active_function()</h2>
+<a id="a8f881657bb8bcb7503fab88d92e0e84f" name="a8f881657bb8bcb7503fab88d92e0e84f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f881657bb8bcb7503fab88d92e0e84f">&#9670;&#160;</a></span>step_epoch()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.use_active_function </td>
+          <td class="memname">netrunner.NetRunner.step_epoch </td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>layer_values</em></span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>batch</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Applies the applicable activation function. </p>
+<p>Performs gradient descent on all mini batches in the epoch. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">layer_values</td><td>Array of values for the layer </td></tr>
+    <tr><td class="paramname">batch</td><td>The whole batch of training examples </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Array of layer values with the activation function applied </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The final average cost and the epoch count </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00117">117</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
-
-</div>
-</div>
-<a id="a2c8750fff5b8e9599b49b7c03ce42c90" name="a2c8750fff5b8e9599b49b7c03ce42c90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c8750fff5b8e9599b49b7c03ce42c90">&#9670;&#160;</a></span>use_gradient_descent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">netrunner.NetRunner.use_gradient_descent </td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>input_set</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>expected_set</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Performs gradient descent on the nerual net. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input_set</td><td>Set of input values </td></tr>
-    <tr><td class="paramname">expected_set</td><td>Set of expected output values </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00201">201</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00348">348</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="a092be0592210521a3e94a15982d99fab" name="a092be0592210521a3e94a15982d99fab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a092be0592210521a3e94a15982d99fab">&#9670;&#160;</a></span>activation</h2>
+<a id="acc6083b7c12cb5646a8697b2bdb963a4" name="acc6083b7c12cb5646a8697b2bdb963a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc6083b7c12cb5646a8697b2bdb963a4">&#9670;&#160;</a></span>__beta</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">str netrunner.NetRunner.activation</td>
+          <td class="memname">netrunner.NetRunner.__beta</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>String declaring which activation function to use. </p>
+<p>Velocity utilization factor for gradient descent. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00046">46</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00138">138</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="af6149d6a7f0f93cba42d5b6fd8eed118" name="af6149d6a7f0f93cba42d5b6fd8eed118"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6149d6a7f0f93cba42d5b6fd8eed118">&#9670;&#160;</a></span>active_derivatives</h2>
+<a id="a1f3113327c939628b6272b2e2659020f" name="a1f3113327c939628b6272b2e2659020f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3113327c939628b6272b2e2659020f">&#9670;&#160;</a></span>__bias_gradient</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">list netrunner.NetRunner.active_derivatives</td>
+          <td class="memname">netrunner.NetRunner.__bias_gradient</td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-<p>Acitvation function derivatives. </p>
-
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00039">39</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
-
-</div>
-</div>
-<a id="a017ef28f1940a6bd2371170ebeec7da7" name="a017ef28f1940a6bd2371170ebeec7da7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a017ef28f1940a6bd2371170ebeec7da7">&#9670;&#160;</a></span>alpha</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">netrunner.NetRunner.alpha</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Alpha value using in momentum based gradient descent. </p>
-
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00069">69</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
-
-</div>
-</div>
-<a id="acad65c6797edb5b21dc31870a4d0b0d9" name="acad65c6797edb5b21dc31870a4d0b0d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acad65c6797edb5b21dc31870a4d0b0d9">&#9670;&#160;</a></span>beta</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">netrunner.NetRunner.beta</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Beta value using in momentum based gradient descent. </p>
-
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00072">72</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
-
-</div>
-</div>
-<a id="a87c1a36f9c710f9e51957a9212146b8c" name="a87c1a36f9c710f9e51957a9212146b8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87c1a36f9c710f9e51957a9212146b8c">&#9670;&#160;</a></span>bias_gradient</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">netrunner.NetRunner.bias_gradient</td>
-        </tr>
-      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Gradient for all biases. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00065">65</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00124">124</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a48abc43d8e92e945cff25bf783ec5c9d" name="a48abc43d8e92e945cff25bf783ec5c9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48abc43d8e92e945cff25bf783ec5c9d">&#9670;&#160;</a></span>biases</h2>
+<a id="a11fe39aed002127f2d1aa1b43560ff0d" name="a11fe39aed002127f2d1aa1b43560ff0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11fe39aed002127f2d1aa1b43560ff0d">&#9670;&#160;</a></span>__biases</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.biases</td>
+          <td class="memname">netrunner.NetRunner.__biases</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Biases applied to each layer output after transformation. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00057">57</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00115">115</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="abfff1a131ff8d3bbbc4d52bb40c9d20d" name="abfff1a131ff8d3bbbc4d52bb40c9d20d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfff1a131ff8d3bbbc4d52bb40c9d20d">&#9670;&#160;</a></span>neuron_counts</h2>
+<a id="ab4c1507f3c7bf69c048424f617fa0561" name="ab4c1507f3c7bf69c048424f617fa0561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4c1507f3c7bf69c048424f617fa0561">&#9670;&#160;</a></span>__epoch</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.neuron_counts</td>
+          <td class="memname">int netrunner.NetRunner.__epoch</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Neuron count in each layer. </p>
+<p>Current epoch count. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00030">30</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00148">148</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a0290b87b29edb8ed57b95f8a85717bb2" name="a0290b87b29edb8ed57b95f8a85717bb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0290b87b29edb8ed57b95f8a85717bb2">&#9670;&#160;</a></span>neuron_values</h2>
+<a id="a800c69e92097a086cc924b73d48da811" name="a800c69e92097a086cc924b73d48da811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a800c69e92097a086cc924b73d48da811">&#9670;&#160;</a></span>__mini_batch_max_index</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">list netrunner.NetRunner.neuron_values</td>
+          <td class="memname">netrunner.NetRunner.__mini_batch_max_index</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Output values for each layer. </p>
+<p>Maximum index used for looping through the mini batches. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00036">36</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00145">145</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a5534b8bc49207d290f76069e84da8d1f" name="a5534b8bc49207d290f76069e84da8d1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5534b8bc49207d290f76069e84da8d1f">&#9670;&#160;</a></span>pre_active_values</h2>
+<a id="a45c7fc4841ce501bc28ddbfcdd1d4908" name="a45c7fc4841ce501bc28ddbfcdd1d4908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c7fc4841ce501bc28ddbfcdd1d4908">&#9670;&#160;</a></span>__mini_batch_size</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">list netrunner.NetRunner.pre_active_values</td>
+          <td class="memname">netrunner.NetRunner.__mini_batch_size</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Layer values before activation. </p>
+<p>Size of the mini batch. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00033">33</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00142">142</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a498e9cc7e2316f6c18a8f7dbc44416ac" name="a498e9cc7e2316f6c18a8f7dbc44416ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a498e9cc7e2316f6c18a8f7dbc44416ac">&#9670;&#160;</a></span>prev_avg_bias_gradient</h2>
+<a id="a26757e8f2734e7a881498a23512bc780" name="a26757e8f2734e7a881498a23512bc780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26757e8f2734e7a881498a23512bc780">&#9670;&#160;</a></span>__net_layers</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.prev_avg_bias_gradient</td>
+          <td class="memname">netrunner.NetRunner.__net_layers</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Previous average gradient for all biases. </p>
+<p>List of <a class="el" href="classnetrunner_1_1_net_layer.html" title="Contains methods and attributes for a neural net layer.">NetLayer</a> objects. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00078">78</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00102">102</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a51bb2c7f8dafbebbbb146c8c57441af8" name="a51bb2c7f8dafbebbbb146c8c57441af8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51bb2c7f8dafbebbbb146c8c57441af8">&#9670;&#160;</a></span>prev_avg_weight_gradient</h2>
+<a id="ac292d048d3688571d2247ce10f043471" name="ac292d048d3688571d2247ce10f043471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac292d048d3688571d2247ce10f043471">&#9670;&#160;</a></span>__prev_bias_velocity</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.prev_avg_weight_gradient</td>
+          <td class="memname">netrunner.NetRunner.__prev_bias_velocity</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Previous average gradient for all weights. </p>
+<p>Previous average gradient velocity for all biases. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00075">75</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00131">131</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="ac5329182cb854872df8cae52b9f59d52" name="ac5329182cb854872df8cae52b9f59d52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5329182cb854872df8cae52b9f59d52">&#9670;&#160;</a></span>weight_gradient</h2>
+<a id="ac4231421eac97310c934352210953a37" name="ac4231421eac97310c934352210953a37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4231421eac97310c934352210953a37">&#9670;&#160;</a></span>__prev_weight_velocity</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.weight_gradient</td>
+          <td class="memname">netrunner.NetRunner.__prev_weight_velocity</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Previous average gradient velocity for all weights. </p>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00128">128</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="afd85855448bd94687681a0e20687fc35" name="afd85855448bd94687681a0e20687fc35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd85855448bd94687681a0e20687fc35">&#9670;&#160;</a></span>__rate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int netrunner.NetRunner.__rate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Learning rate used for gradient descent. </p>
+
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00135">135</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+
+</div>
+</div>
+<a id="a4a2e8589d1b746d5cdf4131d749cccc3" name="a4a2e8589d1b746d5cdf4131d749cccc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2e8589d1b746d5cdf4131d749cccc3">&#9670;&#160;</a></span>__weight_gradient</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">netrunner.NetRunner.__weight_gradient</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Gradient for all weights. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00062">62</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00121">121</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
-<a id="a72dec3365f20558273e5b1105e8b7c96" name="a72dec3365f20558273e5b1105e8b7c96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72dec3365f20558273e5b1105e8b7c96">&#9670;&#160;</a></span>weights</h2>
+<a id="a2ea24e7e208e8413002ef1b4038205cd" name="a2ea24e7e208e8413002ef1b4038205cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ea24e7e208e8413002ef1b4038205cd">&#9670;&#160;</a></span>__weights</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">netrunner.NetRunner.weights</td>
+          <td class="memname">netrunner.NetRunner.__weights</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Weights used to transform the values from one layer into another. </p>
 
-<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00051">51</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="netrunner_8py_source.html#l00108">108</a> of file <a class="el" href="netrunner_8py_source.html">netrunner.py</a>.</p>
 
 </div>
 </div>
