@@ -349,7 +349,7 @@ class NetRunner:
         avg_cost = 0
         for a in range(self.__mini_batch_max_index):
             start_idx = a * self.__mini_batch_size
-            end_idx = (a + 1) * self.__mini_batch_size - 1
+            end_idx = (a + 1) * self.__mini_batch_size
             mini_batch = batch[start_idx:end_idx]
             avg_cost = self.__step_mini_batch(mini_batch)
         self.__epoch += 1
@@ -358,7 +358,7 @@ class NetRunner:
     ## @brief Loads neural net from a npz file
     # @param file File name
     # @return None
-    def loadnet(self, file):
+    def load_net(self, file):
         if len(np.load(file + '.npz', allow_pickle=True).files) > 1:
             self.__weights = np.load(file + '.npz', allow_pickle=True)['arr_0']
             self.__biases = np.load(file + '.npz', allow_pickle=True)['arr_1']
@@ -366,5 +366,5 @@ class NetRunner:
     ## @brief Save neural net to a npz file
     # @param file File name
     # @return None
-    def savenet(self, file):
+    def save_net(self, file):
         np.savez(file, self.__weights, self.__biases, fmt='%s')

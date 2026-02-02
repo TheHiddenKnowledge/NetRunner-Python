@@ -295,20 +295,20 @@
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00349}00349\ \ \ \ \ \ \ \ \ avg\_cost\ =\ 0}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00350}00350\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ a\ \textcolor{keywordflow}{in}\ range(self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a800c69e92097a086cc924b73d48da811}{\_\_mini\_batch\_max\_index}}):}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ start\_idx\ =\ a\ *\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a45c7fc4841ce501bc28ddbfcdd1d4908}{\_\_mini\_batch\_size}}}
-\DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ end\_idx\ =\ (a\ +\ 1)\ *\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a45c7fc4841ce501bc28ddbfcdd1d4908}{\_\_mini\_batch\_size}}\ -\/\ 1}
+\DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ end\_idx\ =\ (a\ +\ 1)\ *\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a45c7fc4841ce501bc28ddbfcdd1d4908}{\_\_mini\_batch\_size}}}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ mini\_batch\ =\ batch[start\_idx:end\_idx]}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ avg\_cost\ =\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_ad387e6f3c021d3ac213ca04476408e9b}{\_\_step\_mini\_batch}}(mini\_batch)}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00355}00355\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_ab4c1507f3c7bf69c048424f617fa0561}{\_\_epoch}}\ +=\ 1}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00356}00356\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ avg\_cost,\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_ab4c1507f3c7bf69c048424f617fa0561}{\_\_epoch}}}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00357}00357\ }
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00358}00358\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00361}\mbox{\hyperlink{classnetrunner_1_1_net_runner_a91dc295678d4d71f4e3f79d3b0295c19}{00361}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classnetrunner_1_1_net_runner_a91dc295678d4d71f4e3f79d3b0295c19}{loadnet}}(self,\ file):}
+\DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00361}\mbox{\hyperlink{classnetrunner_1_1_net_runner_a93ff05e14e846fc9a17f2f7afa2b1015}{00361}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classnetrunner_1_1_net_runner_a93ff05e14e846fc9a17f2f7afa2b1015}{load\_net}}(self,\ file):}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00362}00362\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(np.load(file\ +\ \textcolor{stringliteral}{'.npz'},\ allow\_pickle=\textcolor{keyword}{True}).files)\ >\ 1:}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a2ea24e7e208e8413002ef1b4038205cd}{\_\_weights}}\ =\ np.load(file\ +\ \textcolor{stringliteral}{'.npz'},\ allow\_pickle=\textcolor{keyword}{True})[\textcolor{stringliteral}{'arr\_0'}]}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a11fe39aed002127f2d1aa1b43560ff0d}{\_\_biases}}\ =\ np.load(file\ +\ \textcolor{stringliteral}{'.npz'},\ allow\_pickle=\textcolor{keyword}{True})[\textcolor{stringliteral}{'arr\_1'}]}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00365}00365\ }
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00366}00366\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00369}\mbox{\hyperlink{classnetrunner_1_1_net_runner_ae30ccb373ce29b29aa4d6a75ba1851b2}{00369}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classnetrunner_1_1_net_runner_ae30ccb373ce29b29aa4d6a75ba1851b2}{savenet}}(self,\ file):}
+\DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00369}\mbox{\hyperlink{classnetrunner_1_1_net_runner_ade7821b413319fe8455a0085f8b35802}{00369}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{classnetrunner_1_1_net_runner_ade7821b413319fe8455a0085f8b35802}{save\_net}}(self,\ file):}
 \DoxyCodeLine{\Hypertarget{netrunner_8py_source_l00370}00370\ \ \ \ \ \ \ \ \ np.savez(file,\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a2ea24e7e208e8413002ef1b4038205cd}{\_\_weights}},\ self.\mbox{\hyperlink{classnetrunner_1_1_net_runner_a11fe39aed002127f2d1aa1b43560ff0d}{\_\_biases}},\ fmt=\textcolor{stringliteral}{'\%s'})}
 
 \end{DoxyCode}
