@@ -356,15 +356,21 @@ class NetRunner:
         return avg_cost, self.__epoch
 
     ## @brief Loads neural net from a npz file
-    # @param file File name
-    # @return None
+    # @param file File name without extension
+    # @return True if the file exists
     def load_net(self, file):
-        if len(np.load(file + '.npz', allow_pickle=True).files) > 1:
-            self.__weights = np.load(file + '.npz', allow_pickle=True)['arr_0']
-            self.__biases = np.load(file + '.npz', allow_pickle=True)['arr_1']
+        try:
+            if len(np.load(file + '.npz', allow_pickle=True).files) > 1:
+                self.__weights = np.load(file + '.npz', allow_pickle=True)[
+                    'arr_0']
+                self.__biases = np.load(file + '.npz', allow_pickle=True)[
+                    'arr_1']
+            return True
+        except FileNotFoundError:
+            return False
 
     ## @brief Save neural net to a npz file
-    # @param file File name
+    # @param file File name without extension
     # @return None
     def save_net(self, file):
         np.savez(file, self.__weights, self.__biases, fmt='%s')
